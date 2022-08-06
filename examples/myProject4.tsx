@@ -194,7 +194,7 @@ const App = () => {
       }),
     ]).start();
   }
-  //
+
   return (
     <View>
       <View>

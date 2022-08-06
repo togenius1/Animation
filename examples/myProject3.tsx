@@ -35,10 +35,9 @@ const App = () => {
     }
     // DOWN
     if (cateYPos === -100 && tagsYPos === -100 && dateYPos === -100) {
-      // moveCateHandler();
-      // moveTagsHandler();
-      // moveDateHandler();
-      moveCateAndTagsAndDateHandler();
+      moveCateHandler();
+      moveTagsHandler();
+      moveDateHandler();
       setCateYPos(0);
       setTagsYPos(0);
       setDateYPos(0);
@@ -49,27 +48,24 @@ const App = () => {
   function moveTagsTab() {
     // UP
     if (cateYPos === 0 && tagsYPos === 0 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveCateHandler();
-      moveCateAndTagsHandler();
+      moveTagsHandler();
+      moveCateHandler();
       setCateYPos(-100);
       setTagsYPos(-100);
       return;
     }
     // UP
     if (cateYPos === -100 && tagsYPos === 0 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveDateHandler();
-      moveTagsAndDateHandler();
+      moveTagsHandler();
+      moveDateHandler();
       setTagsYPos(-100);
       setDateYPos(-100);
       return;
     }
     // DOWN
     if (cateYPos === -100 && tagsYPos === -100 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveCateHandler();
-      moveCateAndTagsHandler();
+      moveTagsHandler();
+      moveCateHandler();
       setTagsYPos(0);
       setCateYPos(0);
       return;
@@ -84,10 +80,9 @@ const App = () => {
   function moveDateTab() {
     // UP
     if (dateYPos === 0 && tagsYPos === 0 && cateYPos === 0) {
-      // moveDateHandler();
-      // moveTagsHandler();
-      // moveCateHandler();
-      moveCateAndTagsAndDateHandler();
+      moveDateHandler();
+      moveTagsHandler();
+      moveCateHandler();
       setDateYPos(-100);
       setTagsYPos(-100);
       setCateYPos(-100);
@@ -95,9 +90,8 @@ const App = () => {
     }
     // UP
     if (dateYPos === 0 && tagsYPos === 0 && cateYPos === -100) {
-      // moveDateHandler();
-      // moveTagsHandler();
-      moveTagsAndDateHandler();
+      moveDateHandler();
+      moveTagsHandler();
       setDateYPos(-100);
       setTagsYPos(-100);
       return;
@@ -110,10 +104,9 @@ const App = () => {
     }
     // DOWN
     if (dateYPos === -100 && tagsYPos === -100 && cateYPos === -100) {
-      // moveDateHandler();
-      // moveTagsHandler();
-      // moveCateHandler();
-      moveCateAndTagsAndDateHandler();
+      moveDateHandler();
+      moveTagsHandler();
+      moveCateHandler();
       setDateYPos(0);
       setTagsYPos(0);
       setCateYPos(0);
@@ -145,56 +138,6 @@ const App = () => {
     }).start();
   }
 
-  function moveCateAndTagsHandler() {
-    return Animated.parallel([
-      Animated.timing(catValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-      Animated.timing(tagsValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  }
-
-  function moveTagsAndDateHandler() {
-    return Animated.parallel([
-      Animated.timing(tagsValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-      Animated.timing(dateValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  }
-
-  function moveCateAndTagsAndDateHandler() {
-    return Animated.parallel([
-      Animated.timing(catValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-      Animated.timing(tagsValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-      Animated.timing(dateValue, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  }
-  //
   return (
     <View>
       <View>
