@@ -1,6 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {Animated, StyleSheet, View, Text, Pressable} from 'react-native';
 
+import AnimationTab from './myProjects/AnimationTab';
+import {GlobalStyles} from './myProjects/styles';
+
 const App = () => {
   const catValue = useRef(new Animated.Value(0)).current;
   const tagsValue = useRef(new Animated.Value(0)).current;
@@ -275,6 +278,7 @@ const App = () => {
     }
   }
 
+  // Handler Function
   function moveCateHandler() {
     Animated.timing(catValue, {
       toValue: 1,
@@ -420,180 +424,58 @@ const App = () => {
   //
   return (
     <View>
-      <View>
-        <Animated.View
-          style={[
-            {
-              transform: [
-                {
-                  translateY: catValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, cateYPos],
-                  }),
-                },
-              ],
-            },
-          ]}>
-          <Pressable
-            onPress={moveCateTab}
-            style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.categoryContainer}>
-              <View style={styles.cateHeaderContainer}>
-                <Text style={styles.headerText}>Category</Text>
-              </View>
-              <View>
-                <Text>Category1</Text>
-                <Text>Category1</Text>
-                <Text>Category1</Text>
-              </View>
-            </View>
-          </Pressable>
-        </Animated.View>
-        <Animated.View
-          style={[
-            {
-              transform: [
-                {
-                  translateY: tagsValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, tagsYPos],
-                  }),
-                },
-              ],
-            },
-          ]}>
-          <Pressable
-            onPress={moveTagsTab}
-            style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.tagsContainer}>
-              <View style={styles.tagsHeaderContainer}>
-                <Text style={styles.headerText}>Tags</Text>
-              </View>
-              <View>
-                <Text>Tags1</Text>
-                <Text>Tags1</Text>
-                <Text>Tags1</Text>
-              </View>
-            </View>
-          </Pressable>
-        </Animated.View>
-        <Animated.View
-          style={[
-            {
-              transform: [
-                {
-                  translateY: dateValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, dateYPos],
-                  }),
-                },
-              ],
-            },
-          ]}>
-          <Pressable
-            onPress={moveDateTab}
-            style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.dateContainer}>
-              <View style={styles.dateHeaderContainer}>
-                <Text style={styles.headerText}>Date</Text>
-              </View>
-              <View>
-                <Text>Date1</Text>
-                <Text>Date1</Text>
-                <Text>Date1</Text>
-              </View>
-            </View>
-          </Pressable>
-        </Animated.View>
-        <Animated.View
-          style={[
-            {
-              transform: [
-                {
-                  translateY: tagsValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, accountYPos],
-                  }),
-                },
-              ],
-            },
-          ]}>
-          <Pressable
-            onPress={moveAccountTab}
-            style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.accountContainer}>
-              <View style={styles.accountHeaderContainer}>
-                <Text style={styles.headerText}>Account</Text>
-              </View>
-              <View>
-                <Text>Account1</Text>
-                <Text>Account2</Text>
-                <Text>Account3</Text>
-              </View>
-            </View>
-          </Pressable>
-        </Animated.View>
-      </View>
+      {/* Category Tab */}
+      <AnimationTab
+        onPress={moveCateTab}
+        translateYValue={catValue}
+        yPos={cateYPos}
+        headerLabel="Category"
+        styleContainer={{marginTop: 675}}
+        styleHeaderContainer={{
+          backgroundColor: GlobalStyles.colorShades.shade1,
+        }}
+        styleHeaderText={{color: GlobalStyles.colorFontShades.fontShade1}}
+      />
+      {/* Tags Tab */}
+      <AnimationTab
+        onPress={moveTagsTab}
+        translateYValue={tagsValue}
+        yPos={tagsYPos}
+        headerLabel="Tags"
+        styleContainer={{marginTop: 700}}
+        styleHeaderContainer={{
+          backgroundColor: GlobalStyles.colorShades.shade2,
+        }}
+        styleHeaderText={{color: GlobalStyles.colorFontShades.fontShade2}}
+      />
+      {/* Date Tab */}
+      <AnimationTab
+        onPress={moveDateTab}
+        translateYValue={dateValue}
+        yPos={dateYPos}
+        headerLabel="Date"
+        styleContainer={{marginTop: 725}}
+        styleHeaderContainer={{
+          backgroundColor: GlobalStyles.colorShades.shade3,
+        }}
+        styleHeaderText={{color: GlobalStyles.colorFontShades.fontShade3}}
+      />
+      {/* Account Tab */}
+      <AnimationTab
+        onPress={moveAccountTab}
+        translateYValue={accountValue}
+        yPos={accountYPos}
+        headerLabel="Account"
+        styleContainer={{marginTop: 750}}
+        styleHeaderContainer={{
+          backgroundColor: GlobalStyles.colorShades.shade4,
+        }}
+        styleHeaderText={{color: GlobalStyles.colorFontShades.fontShade4}}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  categoryContainer: {
-    width: '100%',
-    height: 250,
-    backgroundColor: 'white',
-    marginTop: 675,
-    position: 'absolute',
-  },
-  cateHeaderContainer: {
-    justifyContent: 'center',
-    backgroundColor: 'green',
-    height: 25,
-  },
-  tagsContainer: {
-    width: '100%',
-    height: 250,
-    backgroundColor: 'white',
-    marginTop: 700,
-    position: 'absolute',
-  },
-  tagsHeaderContainer: {
-    justifyContent: 'center',
-    backgroundColor: 'orange',
-    height: 25,
-  },
-  dateContainer: {
-    width: '100%',
-    height: 250,
-    backgroundColor: 'white',
-    marginTop: 725,
-    position: 'absolute',
-  },
-  dateHeaderContainer: {
-    justifyContent: 'center',
-    backgroundColor: 'lightblue',
-    height: 25,
-  },
-  accountContainer: {
-    width: '100%',
-    height: 250,
-    backgroundColor: 'white',
-    marginTop: 750,
-    position: 'absolute',
-  },
-  accountHeaderContainer: {
-    justifyContent: 'center',
-    backgroundColor: 'grey',
-    height: 25,
-  },
-  headerText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  pressed: {
-    opacity: 0.75,
-  },
-});
-
 export default App;
+
+const styles = StyleSheet.create({});
