@@ -1,3 +1,6 @@
+/* Three Tabs
+*/
+
 import React, {useRef, useState} from 'react';
 import {Animated, StyleSheet, View, Text, Pressable} from 'react-native';
 
@@ -10,36 +13,35 @@ const App = () => {
   const [tagsYPos, setTagsYPos] = useState(0);
   const [dateYPos, setDateYPos] = useState(0);
 
-  // console.log('cateYPos ', cateYPos);
-  // console.log('tagsYPos ', tagsYPos);
-  // console.log('dateYPos ', dateYPos);
+  const yPos = -100;
+  const duration = 50;
+
+  console.log('cateYPos ', cateYPos);
+  console.log('tagsYPos ', tagsYPos);
+  console.log('dateYPos ', dateYPos);
 
   function moveCateTab() {
     // UP
     if (cateYPos === 0 && tagsYPos === 0 && dateYPos === 0) {
       moveCateHandler();
-      setCateYPos(-100);
+      setCateYPos(yPos);
       return;
     }
     // DOWN
-    if (cateYPos === -100 && tagsYPos === 0 && dateYPos === 0) {
+    if (cateYPos === yPos && tagsYPos === 0 && dateYPos === 0) {
       moveCateHandler();
       setCateYPos(0);
       return;
     }
     // DOWN
-    if (cateYPos === -100 && tagsYPos === -100 && dateYPos === 0) {
+    if (cateYPos === yPos && tagsYPos === yPos && dateYPos === 0) {
       moveTagsHandler();
       setTagsYPos(0);
       return;
     }
     // DOWN
-    if (cateYPos === -100 && tagsYPos === -100 && dateYPos === -100) {
-      // moveCateHandler();
-      // moveTagsHandler();
-      // moveDateHandler();
-      moveCateAndTagsAndDateHandler();
-      setCateYPos(0);
+    if (cateYPos === yPos && tagsYPos === yPos && dateYPos === yPos) {
+      moveTagsAndDateHandler();
       setTagsYPos(0);
       setDateYPos(0);
       return;
@@ -49,33 +51,26 @@ const App = () => {
   function moveTagsTab() {
     // UP
     if (cateYPos === 0 && tagsYPos === 0 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveCateHandler();
       moveCateAndTagsHandler();
-      setCateYPos(-100);
-      setTagsYPos(-100);
+      setCateYPos(yPos);
+      setTagsYPos(yPos);
       return;
     }
     // UP
-    if (cateYPos === -100 && tagsYPos === 0 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveDateHandler();
-      moveTagsAndDateHandler();
-      setTagsYPos(-100);
-      setDateYPos(-100);
+    if (cateYPos === yPos && tagsYPos === 0 && dateYPos === 0) {
+      moveTagsHandler();
+      setTagsYPos(yPos);
       return;
     }
     // DOWN
-    if (cateYPos === -100 && tagsYPos === -100 && dateYPos === 0) {
-      // moveTagsHandler();
-      // moveCateHandler();
+    if (cateYPos === yPos && tagsYPos === yPos && dateYPos === 0) {
       moveCateAndTagsHandler();
       setTagsYPos(0);
       setCateYPos(0);
       return;
     }
     // DOWN
-    if (cateYPos === -100 && tagsYPos === -100 && dateYPos === -100) {
+    if (cateYPos === yPos && tagsYPos === yPos && dateYPos === yPos) {
       moveDateHandler();
       setDateYPos(0);
     }
@@ -83,36 +78,28 @@ const App = () => {
 
   function moveDateTab() {
     // UP
-    if (dateYPos === 0 && tagsYPos === 0 && cateYPos === 0) {
-      // moveDateHandler();
-      // moveTagsHandler();
-      // moveCateHandler();
+    if (cateYPos === 0 && tagsYPos === 0 && dateYPos === 0) {
       moveCateAndTagsAndDateHandler();
-      setDateYPos(-100);
-      setTagsYPos(-100);
-      setCateYPos(-100);
+      setDateYPos(yPos);
+      setTagsYPos(yPos);
+      setCateYPos(yPos);
       return;
     }
     // UP
-    if (dateYPos === 0 && tagsYPos === 0 && cateYPos === -100) {
-      // moveDateHandler();
-      // moveTagsHandler();
+    if (cateYPos === yPos && tagsYPos === 0 && dateYPos === 0) {
       moveTagsAndDateHandler();
-      setDateYPos(-100);
-      setTagsYPos(-100);
+      setDateYPos(yPos);
+      setTagsYPos(yPos);
       return;
     }
     // UP
-    if (dateYPos === 0 && tagsYPos === -100 && cateYPos === -100) {
+    if (cateYPos === yPos && tagsYPos === yPos && dateYPos === 0) {
       moveDateHandler();
-      setDateYPos(-100);
+      setDateYPos(yPos);
       return;
     }
     // DOWN
-    if (dateYPos === -100 && tagsYPos === -100 && cateYPos === -100) {
-      // moveDateHandler();
-      // moveTagsHandler();
-      // moveCateHandler();
+    if (dateYPos === yPos && tagsYPos === yPos && cateYPos === yPos) {
       moveCateAndTagsAndDateHandler();
       setDateYPos(0);
       setTagsYPos(0);
@@ -124,7 +111,7 @@ const App = () => {
   function moveCateHandler() {
     Animated.timing(catValue, {
       toValue: 1,
-      duration: 100,
+      duration: duration,
       useNativeDriver: false,
     }).start();
   }
@@ -132,7 +119,7 @@ const App = () => {
   function moveTagsHandler() {
     Animated.timing(tagsValue, {
       toValue: 1,
-      duration: 100,
+      duration: duration,
       useNativeDriver: false,
     }).start();
   }
@@ -140,7 +127,7 @@ const App = () => {
   function moveDateHandler() {
     Animated.timing(dateValue, {
       toValue: 1,
-      duration: 100,
+      duration: duration,
       useNativeDriver: false,
     }).start();
   }
@@ -149,12 +136,12 @@ const App = () => {
     return Animated.parallel([
       Animated.timing(catValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
       Animated.timing(tagsValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
     ]).start();
@@ -164,12 +151,12 @@ const App = () => {
     return Animated.parallel([
       Animated.timing(tagsValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
       Animated.timing(dateValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
     ]).start();
@@ -179,22 +166,22 @@ const App = () => {
     return Animated.parallel([
       Animated.timing(catValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
       Animated.timing(tagsValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
       Animated.timing(dateValue, {
         toValue: 1,
-        duration: 100,
+        duration: duration,
         useNativeDriver: false,
       }),
     ]).start();
   }
-
+  //
   return (
     <View>
       <View>
@@ -210,14 +197,13 @@ const App = () => {
                 },
               ],
             },
-            // value1.getLayout(),
           ]}>
           <Pressable
             onPress={moveCateTab}
             style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.category}>
-              <View style={{backgroundColor: 'green'}}>
-                <Text>Category</Text>
+            <View style={styles.categoryContainer}>
+              <View style={styles.cateHeaderContainer}>
+                <Text style={styles.headerText}>Category</Text>
               </View>
               <View>
                 <Text>Category1</Text>
@@ -239,14 +225,13 @@ const App = () => {
                 },
               ],
             },
-            // value1.getLayout(),
           ]}>
           <Pressable
             onPress={moveTagsTab}
             style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.tags}>
-              <View style={{backgroundColor: 'red'}}>
-                <Text>Tags</Text>
+            <View style={styles.tagsContainer}>
+              <View style={styles.tagsHeaderContainer}>
+                <Text style={styles.headerText}>Tags</Text>
               </View>
               <View>
                 <Text>Tags1</Text>
@@ -268,14 +253,13 @@ const App = () => {
                 },
               ],
             },
-            // value1.getLayout(),
           ]}>
           <Pressable
             onPress={moveDateTab}
             style={({pressed}) => pressed && styles.pressed}>
-            <View style={styles.date}>
-              <View style={{backgroundColor: 'lightblue'}}>
-                <Text>Date</Text>
+            <View style={styles.dateContainer}>
+              <View style={styles.dateHeaderContainer}>
+                <Text style={styles.headerText}>Date</Text>
               </View>
               <View>
                 <Text>Date1</Text>
@@ -291,26 +275,45 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  category: {
+  categoryContainer: {
     width: '100%',
     height: 250,
     backgroundColor: 'white',
     marginTop: 685,
     position: 'absolute',
   },
-  tags: {
+  cateHeaderContainer: {
+    justifyContent: 'center',
+    backgroundColor: 'green',
+    height: 25,
+  },
+  tagsContainer: {
     width: '100%',
     height: 250,
     backgroundColor: 'white',
-    marginTop: 702,
+    marginTop: 710,
     position: 'absolute',
   },
-  date: {
+  tagsHeaderContainer: {
+    justifyContent: 'center',
+    backgroundColor: 'orange',
+    height: 25,
+  },
+  dateContainer: {
     width: '100%',
     height: 250,
     backgroundColor: 'white',
-    marginTop: 719,
+    marginTop: 735,
     position: 'absolute',
+  },
+  dateHeaderContainer: {
+    justifyContent: 'center',
+    backgroundColor: 'lightblue',
+    height: 25,
+  },
+  headerText: {
+    fontSize: 14,
+    fontWeight: 'bold',
   },
   pressed: {
     opacity: 0.75,
