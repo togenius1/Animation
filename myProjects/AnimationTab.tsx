@@ -56,8 +56,6 @@ const AnimationTab = ({
   );
 };
 
-export default AnimationTab;
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -79,3 +77,5 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
 });
+
+export default AnimationTab;

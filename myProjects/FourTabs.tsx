@@ -1,10 +1,10 @@
 import React, {useRef, useState} from 'react';
 import {Animated, StyleSheet, View, Text, Pressable} from 'react-native';
 
-import AnimationTab from './myProjects/AnimationTab';
-import {GlobalStyles} from './myProjects/styles';
+import AnimationTab from './AnimationTab';
+import {GlobalStyles} from './styles';
 
-const App = () => {
+const FourTabs = () => {
   const catValue = useRef(new Animated.Value(0)).current;
   const tagsValue = useRef(new Animated.Value(0)).current;
   const dateValue = useRef(new Animated.Value(0)).current;
@@ -476,6 +476,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default FourTabs;
 
 const styles = StyleSheet.create({});
